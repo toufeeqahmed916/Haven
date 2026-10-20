@@ -19,7 +19,7 @@ export function HavenHeader({ navigation, action, tone = "dark", productLabel }:
     <header className={`haven-header haven-header--${tone}`}>
       <Container as="nav" className="haven-header__inner" aria-label="Primary navigation">
         <div className="haven-header__identity">
-          <Brand href="#" />
+          <Brand href="#" tone={tone} />
           {productLabel ? <span className="haven-header__product">{productLabel}</span> : null}
         </div>
         <div className="haven-header__links">

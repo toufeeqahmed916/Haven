@@ -38,7 +38,7 @@ export function CitizenShell({ children, navigate }: { children: ReactNode; navi
   return <div className="citizen-account">
     <a className="skip-link" href="#citizen-main">Skip to main content</a>
     <header className="account-header"><Container className="account-nav">
-      <a href="/app" onClick={(event) => go(event, "/app")}><Brand /></a>
+      <Brand href="/app" onClick={(event) => go(event, "/app")} />
       <nav className="account-links" aria-label="Citizen account"><a href="/report" onClick={(event) => go(event, "/report")}>{copy.report}</a><a href="/cases" onClick={(event) => go(event, "/cases")}>{copy.cases}</a><a href="/settings" onClick={(event) => go(event, "/settings")}>{copy.settings}</a></nav>
       <div className="account-actions"><div className="notification-center"><button className="notification-button" type="button" aria-expanded={notificationsOpen} onClick={() => setNotificationsOpen((value) => !value)}><span aria-hidden="true">●</span>{copy.notifications}{unread > 0 && <b>{unread}</b>}</button>{notificationsOpen && <div className="notification-popover" role="region" aria-label={copy.notifications}>{notifications.length ? notifications.map((item) => <button type="button" className={item.read_at ? "" : "unread"} key={item.id} onClick={() => void openNotification(item)}><strong>{item.title}</strong><span>{item.message}</span></button>) : <p>{copy.none}</p>}</div>}</div><Button size="small" variant="light" onClick={async () => { await signOut(); navigate("/"); }}>{copy.signOut}</Button></div>
     </Container></header>

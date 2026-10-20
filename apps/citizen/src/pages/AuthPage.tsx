@@ -51,7 +51,7 @@ export function AuthPage({ mode, navigate }: { mode: "login" | "signup"; navigat
   return (
     <main className="auth-page">
       <section className="auth-story" aria-label="Haven account introduction">
-        <a className="auth-brand-link" href="/" onClick={(event) => { event.preventDefault(); navigate("/"); }}><Brand /></a>
+      <Brand className="auth-brand-link" href="/" onClick={(event) => { event.preventDefault(); navigate("/"); }} />
         <div className="auth-story-copy">
           <Eyebrow tone="dark">A safer way to ask for help</Eyebrow>
           <h1>{mode === "login" ? "Welcome back to Haven." : "Start with one clear step."}</h1>

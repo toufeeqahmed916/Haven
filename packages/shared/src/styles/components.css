@@ -13,14 +13,11 @@
 }
 
 .haven-brand__mark {
-  display: grid;
+  display: block;
   width: 34px;
   height: 34px;
-  place-items: center;
-  border-radius: 11px 11px 11px 4px;
-  background: var(--haven-leaf);
-  color: var(--haven-forest);
-  font-size: 1.125rem;
+  flex: 0 0 34px;
+  object-fit: contain;
 }
 
 .haven-button {
