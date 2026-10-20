@@ -240,6 +240,6 @@ Haven is a **university project** and **not an emergency service**. It supports 
 
 ⭐ If you like this project, give it a star!
 
-<sub>Built with 💚 for safer communities · © 2026 Haven</sub>
+<sub>\© 2026 Haven</sub>
 
 </div>
