@@ -1,0 +1,4 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { canAccessTrack, isStaffRole, needsAssignmentCheck } from "../src/auth/policy.ts";
+test("role policy mirrors Phase 1 RLS track boundaries", () => { assert.equal(canAccessTrack("super_admin", "safety"), true); assert.equal(canAccessTrack("super_admin", "civic"), true); assert.equal(canAccessTrack("control_room_admin", "safety"), true); assert.equal(canAccessTrack("control_room_admin", "civic"), false); assert.equal(canAccessTrack("department_officer", "civic"), true); assert.equal(canAccessTrack("department_officer", "safety"), false); assert.equal(canAccessTrack("citizen", "safety"), false); assert.equal(needsAssignmentCheck("response_team"), true); assert.equal(isStaffRole("response_team"), true); assert.equal(isStaffRole("citizen"), false); });

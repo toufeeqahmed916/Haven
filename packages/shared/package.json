@@ -1,0 +1,24 @@
+{
+  "name": "@haven/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles/index.css",
+    "./tokens.css": "./src/styles/tokens.css"
+  },
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.76.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "typescript": "^5.9.3"
+  }
+}

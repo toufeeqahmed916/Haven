@@ -1,0 +1,368 @@
+.haven-container {
+  width: min(var(--haven-container), calc(100% - (var(--haven-container-gutter) * 2)));
+  margin-inline: auto;
+}
+
+.haven-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 1.375rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.haven-brand__mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 11px 11px 11px 4px;
+  background: var(--haven-leaf);
+  color: var(--haven-forest);
+  font-size: 1.125rem;
+}
+
+.haven-button {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: var(--haven-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  text-decoration: none;
+}
+
+.haven-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.haven-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.haven-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.haven-button--small {
+  min-height: 42px;
+  padding-inline: 16px;
+  font-size: 0.75rem;
+}
+
+.haven-button--full {
+  width: 100%;
+}
+
+.haven-button--primary {
+  background: var(--haven-leaf);
+  color: var(--haven-pine);
+}
+
+.haven-button--dark {
+  background: var(--haven-forest);
+  color: var(--haven-white);
+}
+
+.haven-button--outline {
+  border-color: rgb(255 255 255 / 45%);
+  background: transparent;
+  color: var(--haven-white);
+}
+
+.haven-button--coral {
+  background: var(--haven-coral);
+  color: var(--haven-white);
+}
+
+.haven-button--light {
+  border-color: var(--haven-line);
+  background: var(--haven-white);
+  color: var(--haven-forest);
+}
+
+.haven-card {
+  overflow: hidden;
+  border: 1px solid var(--haven-line);
+  border-radius: var(--haven-radius-xl);
+  box-shadow: var(--haven-shadow-sm);
+}
+
+.haven-card--medium {
+  padding: var(--haven-space-6);
+}
+
+.haven-card--large {
+  padding: clamp(1.5rem, 4vw, 2.625rem);
+}
+
+.haven-card--white {
+  background: var(--haven-white);
+}
+
+.haven-card--paper {
+  background: var(--haven-paper);
+}
+
+.haven-card--sage {
+  background: var(--haven-sage);
+}
+
+.haven-card--sand {
+  background: var(--haven-sand);
+}
+
+.haven-card--forest {
+  border-color: var(--haven-forest);
+  background: var(--haven-forest);
+  color: var(--haven-white);
+}
+
+.haven-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--haven-muted);
+  font: 500 0.6875rem var(--haven-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.haven-eyebrow::before {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  background: var(--haven-leaf);
+  content: "";
+}
+
+.haven-eyebrow--dark {
+  color: #b7c8be;
+}
+
+.haven-field {
+  display: grid;
+  gap: 7px;
+  margin-block: var(--haven-space-4);
+}
+
+.haven-field__label {
+  color: var(--haven-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.haven-field__control {
+  width: 100%;
+  min-height: 49px;
+  border: 1px solid var(--haven-line);
+  border-radius: var(--haven-radius-md);
+  outline: none;
+  background: var(--haven-white);
+  color: var(--haven-ink);
+  padding: 13px 14px;
+}
+
+.haven-field__control::placeholder {
+  color: #87938d;
+}
+
+.haven-field__control:focus {
+  border-color: var(--haven-forest);
+  box-shadow: var(--haven-focus);
+}
+
+.haven-field__control[aria-invalid="true"] {
+  border-color: var(--haven-coral);
+}
+
+.haven-field__textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.haven-field__select {
+  cursor: pointer;
+}
+
+.haven-field__hint,
+.haven-field__error {
+  font-size: 0.6875rem;
+}
+
+.haven-field__hint {
+  color: var(--haven-muted);
+}
+
+.haven-field__error {
+  color: #a52e24;
+}
+
+.haven-header {
+  width: 100%;
+}
+
+.haven-header__inner {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--haven-space-6);
+}
+
+.haven-header__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--haven-space-4);
+}
+
+.haven-header__product {
+  padding-left: var(--haven-space-4);
+  border-left: 1px solid var(--haven-line);
+  color: var(--haven-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.haven-header__links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.haven-header__links a {
+  position: relative;
+}
+
+.haven-header__links a::after {
+  position: absolute;
+  right: 0;
+  bottom: -7px;
+  left: 0;
+  height: 2px;
+  background: var(--haven-leaf);
+  content: "";
+  transform: scaleX(0);
+  transition: transform 180ms ease;
+}
+
+.haven-header__links a:hover::after {
+  transform: scaleX(1);
+}
+
+.haven-header--dark {
+  color: var(--haven-white);
+}
+
+.haven-header--dark .haven-header__links {
+  color: #e0e8e3;
+}
+
+.haven-header--light {
+  color: var(--haven-ink);
+}
+
+.haven-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: var(--haven-radius-round);
+  padding: 7px 11px;
+  font: 500 0.6875rem var(--haven-font-mono);
+  letter-spacing: 0.02em;
+}
+
+.haven-status--neutral {
+  background: #e8e7e1;
+  color: var(--haven-muted);
+}
+
+.haven-status--success {
+  background: var(--haven-sage);
+  color: var(--haven-forest);
+}
+
+.haven-status--warning {
+  background: var(--haven-sand);
+  color: #6b4a13;
+}
+
+.haven-status--danger {
+  background: #f7d8d4;
+  color: #8b281f;
+}
+
+.haven-status--info {
+  background: #d9ecf0;
+  color: #214e59;
+}
+
+.haven-emergency-link {
+  margin-top: var(--haven-space-4);
+}
+
+.haven-emergency-link__dot {
+  width: 8px;
+  height: 8px;
+  border: 2px solid rgb(255 255 255 / 50%);
+  border-radius: 50%;
+  background: var(--haven-white);
+}
+
+@media (max-width: 900px) {
+  :root {
+    --haven-container-gutter: 18px;
+  }
+
+  .haven-header__inner {
+    min-height: 72px;
+  }
+
+  .haven-header__links {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  :root {
+    --haven-container-gutter: 16px;
+  }
+
+  .haven-brand {
+    font-size: 1.25rem;
+  }
+
+  .haven-header__product {
+    display: none;
+  }
+
+  .haven-header__action .haven-button {
+    min-height: 43px;
+    padding-inline: 12px;
+    font-size: 0.75rem;
+  }
+
+  .haven-card--large {
+    padding: var(--haven-space-6);
+    border-radius: var(--haven-radius-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "haven",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "start-citizen.cmd",
+    "dev:citizen": "start-citizen.cmd",
+    "dev:admin": "start-admin.cmd",
+    "dev:api": "start-api.cmd",
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
