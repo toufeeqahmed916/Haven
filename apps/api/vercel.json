@@ -1,7 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm run compile",
+  "outputDirectory": ".",
   "functions": {
-    "index.ts": {
+    "index.js": {
       "maxDuration": 30
     }
   }

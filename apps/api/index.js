@@ -1,8 +1,9 @@
-import { createApp } from "./src/app.ts";
-import { env } from "./src/config/env.ts";
+import "express";
+import { createApp } from "./dist/app.js";
+import { env } from "./dist/config/env.js";
 
 // Vercel serves this exported Express app as a serverless function.
-// Keep server-only values in the API project's Vercel environment settings.
+// dist/ is produced by `pnpm run compile` (tsc) during the Vercel build.
 const app = createApp({
   environment: env.NODE_ENV,
   corsOrigins: env.corsOrigins,
