@@ -21,9 +21,9 @@ export function createApp(settings: AppSettings): Express {
   app.get("/api/v1", (_request, response) => response.json({ data: { name: "Haven API", version: "v1", safetyBoundary: "AI suggests. Humans decide." } }));
   const requireAuth = createRequireAuth({ supabaseUrl: settings.supabaseUrl, supabaseAnonKey: settings.supabaseAnonKey });
   app.use("/api/v1/auth", requireAuth, authRouter);
-  app.use("/api/v1/complaints", requireAuth, createComplaintRouter(serviceClient, { apiKey: settings.geminiApiKey, model: settings.geminiModel ?? "gemini-2.5-flash-lite", timeoutMs: settings.aiTimeoutMs ?? 12000 }));
+  app.use("/api/v1/complaints", requireAuth, createComplaintRouter(serviceClient, { apiKey: settings.geminiApiKey, model: settings.geminiModel ?? "gemini-3.5-flash-lite", timeoutMs: settings.aiTimeoutMs ?? 12000 }));
   app.use("/api/v1/admin/complaints", requireAuth, createAdminComplaintRouter(serviceClient));
-  app.use("/api/v1/files", requireAuth, createFileRouter(serviceClient, { apiKey: settings.geminiApiKey, model: settings.geminiModel ?? "gemini-2.5-flash-lite", timeoutMs: settings.aiTimeoutMs ?? 12000 }));
+  app.use("/api/v1/files", requireAuth, createFileRouter(serviceClient, { apiKey: settings.geminiApiKey, model: settings.geminiModel ?? "gemini-3.5-flash-lite", timeoutMs: settings.aiTimeoutMs ?? 12000 }));
   app.use("/api/admin/complaints", requireAuth, createAdminComplaintRouter(serviceClient));
   app.use(notFound); app.use(errorHandler); return app;
 }

@@ -60,6 +60,7 @@
 - 🌐 **Trilingual + RTL** — English, Urdu (اردو) and Sindhi (سنڌي) with proper right-to-left layouts
 - 🚨 **Transparent safety rules** — danger phrases (weapon, attack, fire, stalking, live wire, and more) detected in all three languages before any AI is used
 - 🤖 **Optional Gemini AI** — summary, translation, category and urgency suggestion; complaint text is treated as untrusted data
+- 🎙️ **Urdu-first voice intake** — speak in Urdu or English, let Gemini prepare every complaint field, review it, then confirm once to submit
 - 🧯 **Safe AI fallback** — if AI is down or not configured, urgency is raised to **High** and human review is required
 - 🔐 **Row Level Security** — citizens only see their own cases; staff only see the tracks their role allows
 - 📎 **Private evidence uploads** — signed upload/download URLs on private Supabase buckets
@@ -96,7 +97,7 @@ flowchart LR
 | **Design system** | Shared `@haven/shared` package with tokens, components, auth provider |
 | **API** | Node.js, Express 5, Zod, Helmet, pdf-lib |
 | **Database / Auth / Storage** | Supabase (Postgres, Auth, Storage, Realtime, RLS) |
-| **AI** | Google Gemini (`gemini-2.5-flash-lite`) with deterministic fallback |
+| **AI** | Google Gemini (`gemini-3.5-flash-lite`) with deterministic fallback |
 | **Tooling** | pnpm workspaces, TypeScript, Node test runner |
 | **Deployment** | Render (API), static hosting for frontends |
 
@@ -191,7 +192,7 @@ Base path: `/api/v1` · Health check: `GET /health`
 
 | Area | Endpoints |
 | :--- | :--- |
-| **Complaints** | `POST /complaints` · `GET /complaints/:id/guidance` · `PATCH /complaints/:id/draft` · `POST /complaints/:id/submit` · `POST /complaints/:id/reopen` · `POST /complaints/:id/appeals` |
+| **Complaints** | `POST /complaints/voice-intake` · `POST /complaints` · `GET /complaints/:id/guidance` · `PATCH /complaints/:id/draft` · `POST /complaints/:id/submit` · `POST /complaints/:id/reopen` · `POST /complaints/:id/appeals` |
 | **Admin** | `POST /admin/complaints/:id/actions` · `POST /admin/complaints/:id/status` |
 | **Files** | `POST /files/complaints/:id/attachments/upload-url` · `.../complete` · `GET /files/attachments/:id/download-url` · `POST /files/attachments/:id/transcribe` |
 | **Documents** | `POST /files/complaints/:id/documents` · `GET /files/documents/:id/download-url` |

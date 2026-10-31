@@ -121,7 +121,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 
 # Optional; leave blank to use the safe fallback.
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-2.5-flash-lite
+GEMINI_MODEL=gemini-3.5-flash-lite
 AI_TIMEOUT_MS=12000
 RATE_LIMIT_MAX=300
 TRUST_PROXY=false
@@ -165,6 +165,7 @@ Keep the API window open together with the citizen and admin frontend windows.
 | `GET /api/v1/auth/staff` | Staff only | Staff-role guard check |
 | `GET /api/v1/auth/track/safety` | Allowed safety staff | Safety-track guard check |
 | `GET /api/v1/auth/track/civic` | Allowed civic staff | Civic-track guard check |
+| `POST /api/v1/complaints/voice-intake` | Active citizen | Turn an Urdu or English recording into a reviewable complaint draft with Gemini |
 | `POST /api/v1/complaints` | Active citizen | Create a draft or submitted complaint |
 | `PATCH /api/v1/complaints/:id/draft` | Draft owner | Edit a draft |
 | `POST /api/v1/complaints/:id/submit` | Draft owner | Submit a draft |

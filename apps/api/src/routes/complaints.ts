@@ -1,8 +1,8 @@
-import { Router, type Router as ExpressRouter } from "express";
+import { raw, Router, type Router as ExpressRouter } from "express";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { analyzeSafety } from "../analysis/safety-rules.ts";
-import { analyzeWithOptionalAi, type AiConfig } from "../analysis/ai-analysis.ts";
+import { analyzeWithOptionalAi, prepareVoiceIntake, type AiConfig } from "../analysis/ai-analysis.ts";
 import { generateCaseGuidance } from "../analysis/case-guidance.ts";
 import { canAccessTrack } from "../auth/policy.ts";
 import { AppError } from "../lib/errors.ts";
@@ -67,6 +67,30 @@ async function save(client: SupabaseClient, actorId: string, id: string | null, 
 
 export function createComplaintRouter(serviceClient: SupabaseClient | null, aiConfig: AiConfig): ExpressRouter {
   const router = Router();
+
+  router.post("/voice-intake", raw({ type: "audio/*", limit: "8mb" }), async (request, response) => {
+    if (request.auth!.profile.role !== "citizen") throw new AppError(403, "CITIZEN_ONLY", "Only citizen accounts can prepare voice complaints.");
+    if (!aiConfig.apiKey) throw new AppError(503, "VOICE_AI_NOT_CONFIGURED", "Add GEMINI_API_KEY to use the voice complaint assistant.");
+    if (!Buffer.isBuffer(request.body) || request.body.length < 500) throw new AppError(400, "VOICE_AUDIO_REQUIRED", "Record a short voice message before asking Haven to fill the form.");
+    const mimeType = String(request.headers["content-type"] ?? "").split(";", 1)[0].toLowerCase();
+    const allowedMimeTypes = new Set(["audio/webm", "audio/mp4", "audio/mpeg", "audio/wav", "audio/ogg"]);
+    if (!allowedMimeTypes.has(mimeType)) throw new AppError(415, "VOICE_FORMAT_UNSUPPORTED", "Use a supported browser audio format.");
+    const client = requireService(serviceClient);
+    const categories = await client.from("categories").select("code,name_en,name_ur").eq("is_active", true).order("sort_order");
+    if (categories.error || !categories.data?.length) databaseError(categories.error, "Complaint categories could not be loaded.");
+    try {
+      const data = await prepareVoiceIntake({
+        bytes: request.body,
+        mimeType,
+        allowedCategories: categories.data.map((category) => ({ code: String(category.code), nameEn: String(category.name_en), nameUr: category.name_ur ? String(category.name_ur) : null })),
+      }, aiConfig);
+      response.setHeader("cache-control", "private, no-store");
+      response.json({ data });
+    } catch (error) {
+      console.error(JSON.stringify({ level: "error", requestId: request.requestId, message: error instanceof Error ? error.message : "Voice intake failed" }));
+      throw new AppError(502, "VOICE_PROCESSING_FAILED", "Haven could not understand that recording. Please try again or type the complaint.");
+    }
+  });
 
   router.post("/", validateBody(complaintInput), async (request, response) => {
     if (request.auth!.profile.role !== "citizen") throw new AppError(403, "CITIZEN_ONLY", "Only citizen accounts can create complaints.");

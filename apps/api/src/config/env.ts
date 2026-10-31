@@ -14,7 +14,7 @@ const schema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(20).optional(),
   SUPABASE_SECRET_KEY: z.string().min(20).optional(),
   GEMINI_API_KEY: z.string().min(20).optional(),
-  GEMINI_MODEL: z.string().min(3).default("gemini-2.5-flash-lite"),
+  GEMINI_MODEL: z.string().min(3).default("gemini-3.5-flash-lite"),
   AI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(30000).default(12000),
   RATE_LIMIT_MAX: z.coerce.number().int().min(10).max(10000).default(300),
   TRUST_PROXY: z.enum(["true", "false"]).default("false"),

@@ -7,12 +7,7 @@ type Notification = { id: string; complaint_id: string | null; title: string; me
 export function CitizenShell({ children, navigate }: { children: ReactNode; navigate: Navigate }) {
   const { client, signOut, session } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]); const [notificationsOpen, setNotificationsOpen] = useState(false);
-  const language = String(session?.user.user_metadata.language ?? "en") as "en" | "ur" | "sd";
-  const copy = language === "ur"
-    ? { report: "مسئلہ رپورٹ کریں", cases: "میرے کیس", settings: "ترتیبات", signOut: "سائن آؤٹ", emergency: "پولیس 15 کو کال کریں", notifications: "اطلاعات", none: "کوئی نئی اطلاع نہیں" }
-    : language === "sd"
-      ? { report: "مسئلو رپورٽ ڪريو", cases: "منهنجا ڪيس", settings: "سيٽنگون", signOut: "سائن آئوٽ", emergency: "پوليس 15 کي ڪال ڪريو", notifications: "اطلاع", none: "ڪابه نئين اطلاع ناهي" }
-      : { report: "Report a problem", cases: "My cases", settings: "Settings", signOut: "Sign out", emergency: "Call 15 Police", notifications: "Notifications", none: "No new notifications" };
+  const copy = { report: "Report a problem", cases: "My cases", settings: "Settings", signOut: "Sign out", emergency: "Call 15 Police", notifications: "Notifications", none: "No new notifications" };
 
   const loadNotifications = useCallback(async () => {
     if (!client || !session) return;
@@ -20,7 +15,7 @@ export function CitizenShell({ children, navigate }: { children: ReactNode; navi
     if (!result.error) setNotifications((result.data ?? []) as Notification[]);
   }, [client, session]);
 
-  useEffect(() => { document.documentElement.lang = language; document.documentElement.dir = language === "en" ? "ltr" : "rtl"; }, [language]);
+  useEffect(() => { document.documentElement.lang = "en"; document.documentElement.dir = "ltr"; }, []);
   useEffect(() => { void loadNotifications(); }, [loadNotifications]);
   useEffect(() => {
     if (!client || !session) return;

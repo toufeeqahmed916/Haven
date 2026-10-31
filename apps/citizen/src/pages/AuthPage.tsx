@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Brand, Button, Card, Eyebrow, Field, LinkButton, SelectField, useAuth } from "@haven/shared";
+import { Brand, Button, Card, Eyebrow, Field, LinkButton, useAuth } from "@haven/shared";
 
 type Navigate = (path: string) => void;
 
@@ -39,7 +39,7 @@ export function AuthPage({ mode, navigate }: { mode: "login" | "signup"; navigat
 
     const result = await signUp(email, password, {
       displayName: String(values.get("displayName") ?? ""),
-      language: String(values.get("language") ?? "en") as "en" | "ur" | "sd",
+      language: "en",
       phone: String(values.get("phone") ?? ""),
     });
     setBusy(false);
@@ -76,7 +76,6 @@ export function AuthPage({ mode, navigate }: { mode: "login" | "signup"; navigat
             {mode === "signup" && <Field label="Your name" name="displayName" autoComplete="name" required minLength={2} placeholder="How should we address you?" />}
             <Field label="Email address" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
             {mode === "signup" && <Field label="Phone number (optional)" name="phone" type="tel" autoComplete="tel" placeholder="e.g. +92 300 1234567" hint="Saved only as preparation. Phone OTP is not enabled yet." />}
-            {mode === "signup" && <SelectField label="Preferred language" name="language" defaultValue="en"><option value="en">English</option><option value="ur">اردو — Urdu</option><option value="sd">سنڌي — Sindhi</option></SelectField>}
             <Field label="Password" name="password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} required minLength={8} placeholder="At least 8 characters" />
             {mode === "signup" && <Field label="Confirm password" name="confirmPassword" type="password" autoComplete="new-password" required minLength={8} placeholder="Repeat your password" />}
             {mode === "signup" && <label className="auth-consent"><input type="checkbox" name="consent" required /><span>I understand Haven is not an emergency service and does not guarantee a response.</span></label>}
