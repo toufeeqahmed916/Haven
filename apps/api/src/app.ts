@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type RequestHandler } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { createRequireAuth } from "./auth/middleware.ts";
@@ -10,10 +10,11 @@ import { createServiceClient } from "./lib/supabase.ts";
 import { createFileRouter } from "./routes/files.ts";
 import { createRateLimiter } from "./middleware/rate-limit.ts";
 
+const helmetMiddleware = helmet as unknown as (options?: object) => RequestHandler;
 export type AppSettings = { environment: "development" | "test" | "production"; corsOrigins: string[]; supabaseUrl: string; supabaseAnonKey: string; supabaseServiceRoleKey?: string; geminiApiKey?: string; geminiModel?: string; aiTimeoutMs?: number; rateLimitMax?: number; trustProxy?: boolean };
 export function createApp(settings: AppSettings): Express {
   const serviceClient = settings.supabaseServiceRoleKey ? createServiceClient(settings.supabaseUrl, settings.supabaseServiceRoleKey) : null;
-  const app = express(); app.disable("x-powered-by"); if (settings.trustProxy) app.set("trust proxy", 1); app.use(requestContext); app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
+  const app = express(); app.disable("x-powered-by"); if (settings.trustProxy) app.set("trust proxy", 1); app.use(requestContext); app.use(helmetMiddleware({ crossOriginResourcePolicy: { policy: "same-site" } }));
   app.use(cors({ origin(origin, callback) { callback(null, !origin || settings.corsOrigins.includes(origin)); }, credentials: false }));
   app.use(createRateLimiter({ windowMs: 15 * 60 * 1000, limit: settings.rateLimitMax ?? 300, name: "api" }));
   app.use(express.json({ limit: "1mb" }));
