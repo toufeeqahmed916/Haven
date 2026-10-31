@@ -20,7 +20,7 @@
 ![Supabase](https://img.shields.io/badge/Supabase-123b2e?style=flat-square&logo=supabase&logoColor=3ECF8E)
 ![Gemini](https://img.shields.io/badge/Gemini_AI-123b2e?style=flat-square&logo=googlegemini&logoColor=8E75B2)
 ![pnpm](https://img.shields.io/badge/pnpm_workspace-123b2e?style=flat-square&logo=pnpm&logoColor=F69220)
-![Render](https://img.shields.io/badge/Render-123b2e?style=flat-square&logo=render&logoColor=46E3B7)
+![Vercel](https://img.shields.io/badge/Vercel-123b2e?style=flat-square&logo=vercel&logoColor=white)
 ![License](https://img.shields.io/badge/University_Project-b8e05a?style=flat-square&labelColor=123b2e)
 
 **[About](#-about)** ·
@@ -30,6 +30,8 @@
 **[Getting started](#-getting-started)** ·
 **[API](#-api-overview)** ·
 **[Roadmap](#-project-phases)**
+
+> Deployment guide: [Deploy all three Haven projects on Vercel](docs/VERCEL_DEPLOYMENT.md).
 
 </div>
 
